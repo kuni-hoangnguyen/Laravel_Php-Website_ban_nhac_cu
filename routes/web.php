@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
 Route::post('/search', [SearchController::class, 'search']);
+Route::get('/search', [SearchController::class, 'search']);
 Route::get('/shop', [ShopController::class, 'index']);
 Route::get('/contact', [ContactController::class, 'index']);
 Route::get('/about-us', [AboutController::class, 'index']);

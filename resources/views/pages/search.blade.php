@@ -26,6 +26,9 @@
                         <div class="sidebar__item">
                             <h4>Danh mục sản phẩm</h4>
                             <ul>
+                                <li>
+                                    <a href="{{ URL::to('/shop') }}">Tất cả sản phẩm</a>
+                                </li>
                                 @foreach ($all_type as $type)
                                     <li><a
                                             href="{{ URL::to('/category_type/' . $type->id_type) }}">{{ $type->category_type }}</a>
@@ -35,7 +38,7 @@
                         </div>
                         <div class="sidebar__item">
                             <h4>Mức giá</h4>
-                            <form method="GET" action="{{ url('shop') }}#product-section" id="price-filter-form">
+                            <form method="GET" action="{{ url('search') }}#product-section" id="price-filter-form">
                                 @csrf
                                 <div class="price-range-wrap">
                                     <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
@@ -50,6 +53,7 @@
                                                 value="{{ request('minamount', 0) }}">
                                             <input type="text" id="maxamount" name="maxamount" readonly
                                                 value="{{ request('maxamount', 15000000) }}">
+                                            <input type="hidden" name="keywords_submit" value="{{ $keyword }}">
                                         </div>
                                     </div>
                                 </div>

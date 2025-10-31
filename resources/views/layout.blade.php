@@ -247,7 +247,8 @@
                                 @csrf
                                 <div class="hero__search__categories" style="text-align: left;"> Tất cả danh mục
                                 </div>
-                                <input name="keywords_submit" type="text" placeholder="Bạn cần tìm gì?">
+                                <input name="keywords_submit" type="text" placeholder="Bạn cần tìm gì?"
+                                    value="{{ $keyword ?? '' }}">
                                 <button type="submit" class="site-btn">TÌM KIẾM</button>
                             </form>
                         </div>

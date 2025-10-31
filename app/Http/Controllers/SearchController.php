@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,7 +13,7 @@ class SearchController extends Controller
         $query = DB::table('tbl_category')->where('category_name', 'LIKE', '%' . $keyword . '%');
 
         // Sorting
-        if ($request->has('sort') && !empty($request->sort)) {
+        if ($request->has('sort') && ! empty($request->sort)) {
             switch ($request->sort) {
                 case 'price_asc':
                     $query->orderBy('category_price', 'asc');
@@ -35,14 +34,21 @@ class SearchController extends Controller
 
         // Price range filtering
         if ($request->has('minamount') && $request->has('maxamount')) {
-            $minPrice = $request->minamount ? (int) str_replace(',', '', $request->minamount) : 0;
-            $maxPrice = $request->maxamount ? (int) str_replace(',', '', $request->maxamount) : 15000000;
+            if (! $request->minamount || ! $request->maxamount) {
+                $minPrice = 0;
+                $maxPrice = 15000000;
+            } else {
+                $minPrice = (int) preg_replace('/\D/', '', $request->minamount);
+                $maxPrice = (int) preg_replace('/\D/', '', $request->maxamount);
+
+            }
             $query->whereBetween('category_price', [$minPrice, $maxPrice]);
+            $count_product = $query->count();
         }
 
         $count_product = $query->count();
-        $product = $query->paginate(12);
+        $product       = $query->paginate(12);
 
-        return view('pages.search', compact('product', 'count_product'));
+        return view('pages.search', compact('product', 'count_product', 'keyword'));
     }
 }
