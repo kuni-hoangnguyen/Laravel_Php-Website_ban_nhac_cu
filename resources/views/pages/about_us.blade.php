@@ -38,7 +38,7 @@
                         <div class="fullwidth-banner-text"
                             style="
 						position: relative;
-						margin-bottom: 20px;
+
 						color: white;
 						text-align: center;
 						background: #f8f4e9;
@@ -97,7 +97,7 @@
                     <div class="fullwidth-banner-text"
                         style="
 					position: relative;
-					margin-bottom: 20px;
+
 					color: white;
 					text-align: center;
 					background: #f8f4e9;
@@ -155,7 +155,7 @@
                     <div class="fullwidth-banner-text"
                         style="
     position: relative;
-    margin-bottom: 20px;
+
     color: white;
     text-align: center;
     background: #f8f4e9;
@@ -212,7 +212,7 @@
                     <div class="fullwidth-banner-text"
                         style="
     position: relative;
-    margin-bottom: 20px;
+
     color: white;
     text-align: center;
     background: #f8f4e9;
@@ -269,7 +269,7 @@
                     <div class="fullwidth-banner-text"
                         style="
 					position: relative;
-					margin-bottom: 20px;
+
 					color: white;
 					text-align: center;
 					background: #f8f4e9;
