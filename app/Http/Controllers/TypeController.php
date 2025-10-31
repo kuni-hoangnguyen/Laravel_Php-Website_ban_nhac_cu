@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -37,7 +36,7 @@ class TypeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_type' => 'nullable|string|max:255',
-            'image_type' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_type'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -49,7 +48,7 @@ class TypeController extends Controller
         ];
 
         if ($request->hasFile('image_type')) {
-            $file = $request->file('image_type');
+            $file     = $request->file('image_type');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images/type'), $filename);
             $data['image_type'] = $filename;
@@ -72,7 +71,7 @@ class TypeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'category_type' => 'required|string|max:255',
-            'image_type' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_type'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -84,7 +83,7 @@ class TypeController extends Controller
         ];
 
         if ($request->hasFile('image_type')) {
-            $file = $request->file('image_type');
+            $file     = $request->file('image_type');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images/type'), $filename);
             $data['image_type'] = $filename;
@@ -111,10 +110,10 @@ class TypeController extends Controller
     public function showCategoryType(Request $request, $id)
     {
 
-        $query = DB::table('tbl_category')->where('category_type', '=', $id);
+        $query         = DB::table('tbl_category')->where('category_type', '=', $id);
         $count_product = $query->count();
 
-        if ($request->has('sort') && !empty($request->sort)) {
+        if ($request->has('sort') && ! empty($request->sort)) {
             switch ($request->sort) {
                 case 'price_asc':
                     $query->orderBy('category_price', 'asc');
@@ -136,12 +135,12 @@ class TypeController extends Controller
         }
 
         if ($request->has('minamount') && $request->has('maxamount')) {
-            if (!$request->minamount || !$request->maxamount) {
+            if (! $request->minamount || ! $request->maxamount) {
                 $minPrice = 0;
                 $maxPrice = 15000000;
             } else {
-                $minPrice = (int) str_replace(',', '', $request->minamount);
-                $maxPrice = (int) str_replace(',', '', $request->maxamount);
+                $minPrice = (int) preg_replace('/\D/', '', $request->minamount);
+                $maxPrice = (int) preg_replace('/\D/', '', $request->maxamount);
             }
             $query->whereBetween('category_price', [$minPrice, $maxPrice]);
             $count_product = $query->count();

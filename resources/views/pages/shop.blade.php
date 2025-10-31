@@ -26,6 +26,9 @@
                         <div class="sidebar__item">
                             <h4>Danh mục sản phẩm</h4>
                             <ul>
+                                <li>
+                                    <a href="{{ URL::to('/shop') }}">Tất cả sản phẩm</a>
+                                </li>
                                 @foreach ($all_type as $type)
                                     <li><a
                                             href="{{ URL::to('/category_type/' . $type->id_type) }}">{{ $type->category_type }}</a>

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,11 +8,11 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        $query = DB::table('tbl_category');
+        $query         = DB::table('tbl_category');
         $count_product = $query->count();
 
         // Apply sorting
-        if ($request->has('sort') && !empty($request->sort)) {
+        if ($request->has('sort') && ! empty($request->sort)) {
             switch ($request->sort) {
                 case 'price_asc':
                     $query->orderBy('category_price', 'asc');
@@ -35,12 +34,13 @@ class ShopController extends Controller
         }
 
         if ($request->has('minamount') && $request->has('maxamount')) {
-            if (!$request->minamount || !$request->maxamount) {
+            if (! $request->minamount || ! $request->maxamount) {
                 $minPrice = 0;
                 $maxPrice = 15000000;
             } else {
-                $minPrice = (int) str_replace(',', '', $request->minamount);
-                $maxPrice = (int) str_replace(',', '', $request->maxamount);
+                $minPrice = (int) preg_replace('/\D/', '', $request->minamount);
+                $maxPrice = (int) preg_replace('/\D/', '', $request->maxamount);
+
             }
             $query->whereBetween('category_price', [$minPrice, $maxPrice]);
             $count_product = $query->count();

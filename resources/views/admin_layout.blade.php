@@ -79,110 +79,146 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <!-- Dashboard -->
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ URL::to('/dashboard') }}">
-                            <i class="mdi mdi-home menu-icon"></i> <!-- Thay icon "home" -->
-                            <span class="menu-title">Trang chủ</span> <!-- Tên menu là "Trang chủ" -->
+                            <i class="mdi mdi-home menu-icon"></i>
+                            <span class="menu-title">Trang chủ</span>
                         </a>
                     </li>
 
                     <!-- Quản lý sản phẩm -->
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                            aria-controls="ui-basic">
-                            <i class="mdi mdi-cube-outline menu-icon"></i> <!-- Thay icon "cube" -->
+                    <li
+                        class="nav-item {{ request()->is('all-category') || request()->is('add-category') ? 'active' : '' }}">
+                        <a class="nav-link {{ request()->is('all-category') || request()->is('add-category') ? '' : 'collapsed' }}"
+                            data-toggle="collapse" href="#ui-basic"
+                            aria-expanded="{{ request()->is('all-category') || request()->is('add-category') ? 'true' : 'false' }}"
+                            aria-controls="ui-basic" data-parent="#sidebar">
+                            <i class="mdi mdi-cube-outline menu-icon"></i>
                             <span class="menu-title">Sản phẩm</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="ui-basic">
+                        <div class="collapse {{ request()->is('all-category') || request()->is('add-category') ? 'show' : '' }}"
+                            id="ui-basic">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/all-category') }}">Danh
-                                        sách sản phẩm</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/add-category') }}">Thêm
-                                        sản phẩm</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('all-category') ? 'active' : '' }}"
+                                        href="{{ URL::to('/all-category') }}">
+                                        Danh sách sản phẩm
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('add-category') ? 'active' : '' }}"
+                                        href="{{ URL::to('/add-category') }}">
+                                        Thêm sản phẩm
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
 
                     <!-- Quản lý banner -->
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
-                            aria-controls="form-elements">
-                            <i class="mdi mdi-image-frame menu-icon"></i> <!-- Thay icon "image-frame" -->
+                    <li class="nav-item {{ request()->is('all-banner') ? 'active' : '' }}">
+                        <a class="nav-link {{ request()->is('all-banner') ? '' : 'collapsed' }}" data-toggle="collapse"
+                            href="#form-elements" aria-expanded="{{ request()->is('all-banner') ? 'true' : 'false' }}"
+                            aria-controls="form-elements" data-parent="#sidebar">
+                            <i class="mdi mdi-image-frame menu-icon"></i>
                             <span class="menu-title">Banner</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="form-elements">
+                        <div class="collapse {{ request()->is('all-banner') ? 'show' : '' }}" id="form-elements">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="{{ URL::to('/all-banner') }}">Cập
-                                        nhật
-                                        banner</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('all-banner') ? 'active' : '' }}"
+                                        href="{{ URL::to('/all-banner') }}">
+                                        Cập nhật banner
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
 
                     <!-- Thông tin cửa hàng -->
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false"
-                            aria-controls="charts">
-                            <i class="mdi mdi-storefront menu-icon"></i> <!-- Thay icon "storefront" -->
+                    <li class="nav-item {{ request()->is('all-info') ? 'active' : '' }}">
+                        <a class="nav-link {{ request()->is('all-info') ? '' : 'collapsed' }}" data-toggle="collapse"
+                            href="#charts" aria-expanded="{{ request()->is('all-info') ? 'true' : 'false' }}"
+                            aria-controls="charts" data-parent="#sidebar">
+                            <i class="mdi mdi-storefront menu-icon"></i>
                             <span class="menu-title">Cửa hàng</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="charts">
+                        <div class="collapse {{ request()->is('all-info') ? 'show' : '' }}" id="charts">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/all-info') }}">Quản lý
-                                        thông tin</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('all-info') ? 'active' : '' }}"
+                                        href="{{ URL::to('/all-info') }}">
+                                        Quản lý thông tin
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
 
                     <!-- Phân loại sản phẩm -->
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false"
-                            aria-controls="icons">
+                    <li class="nav-item {{ request()->is('all-type') || request()->is('add-type') ? 'active' : '' }}">
+                        <a class="nav-link {{ request()->is('all-type') || request()->is('add-type') ? '' : 'collapsed' }}"
+                            data-toggle="collapse" href="#icons"
+                            aria-expanded="{{ request()->is('all-type') || request()->is('add-type') ? 'true' : 'false' }}"
+                            aria-controls="icons" data-parent="#sidebar">
                             <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-                            <!-- Thay icon "format-list-bulleted" -->
                             <span class="menu-title">Phân loại</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="icons">
+                        <div class="collapse {{ request()->is('all-type') || request()->is('add-type') ? 'show' : '' }}"
+                            id="icons">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/all-type') }}">Danh
-                                        sách phân loại</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/add-type') }}">Thêm
-                                        phân loại</a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('all-type') ? 'active' : '' }}"
+                                        href="{{ URL::to('/all-type') }}">
+                                        Danh sách phân loại
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('add-type') ? 'active' : '' }}"
+                                        href="{{ URL::to('/add-type') }}">
+                                        Thêm phân loại
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
 
-                    <!-- Error Pages -->
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#error" aria-expanded="false"
-                            aria-controls="error">
+                    <!-- Đơn hàng -->
+                    <li class="nav-item {{ request()->is('all-order') ? 'active' : '' }}">
+                        <a class="nav-link {{ request()->is('all-order') ? '' : 'collapsed' }}"
+                            data-toggle="collapse" href="#error"
+                            aria-expanded="{{ request()->is('all-order') ? 'true' : 'false' }}" aria-controls="error"
+                            data-parent="#sidebar">
                             <i class="mdi mdi-alert-circle-outline menu-icon"></i>
-                            <!-- Thay icon "alert-circle-outline" -->
                             <span class="menu-title">Đơn hàng</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="error">
+                        <div class="collapse {{ request()->is('all-order') ? 'show' : '' }}" id="error">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ URL::to('/all-order') }}"> Quản
-                                        lý đơn hàng
-                                    </a></li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ request()->is('all-order') ? 'active' : '' }}"
+                                        href="{{ URL::to('/all-order') }}">
+                                        Quản lý đơn hàng
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
 
-                    <!-- Documentation -->
-                    <li class="nav-item">
+                    <!-- Liên hệ -->
+                    <li class="nav-item {{ request()->is('all-contact') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ URL::to('/all-contact') }}">
-                            <i class="mdi mdi-file-document-box menu-icon"></i> <!-- Thay icon "file-document-box" -->
+                            <i class="mdi mdi-file-document-box menu-icon"></i>
                             <span class="menu-title">Liên hệ</span>
                         </a>
                     </li>
                 </ul>
             </nav>
+
             <!-- partial -->
             @Yield('admin_content')
             <!-- main-panel ends -->
@@ -195,28 +231,21 @@
     <script src="{{ URL::asset('backend/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="{{ URL::asset('backend/vendors/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ URL::asset('backend/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-    <script src="{{ URL::asset('backend/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
-    <script src="{{ URL::asset('backend/js/dataTables.select.min.js') }}"></script>
 
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="{{ URL::asset('backend/js/off-canvas.js') }}"></script>
+
     <script src="{{ URL::asset('backend/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ URL::asset('backend/js/template.js') }}"></script>
-    <script src="{{ URL::asset('backend/js/settings.js') }}"></script>
-    <script src="{{ URL::asset('backend/js/todolist.js') }}"></script>
+
     <!-- endinject -->
     <!-- Custom js for this page-->
-    <script src="{{ URL::asset('backend/js/dashboard.js') }}"></script>
-    <script src="{{ URL::asset('backend/js/Chart.roundedBarCharts.js') }}"></script>
     <script src="{{ URL::asset('backend/js/file-upload.js') }}"></script>
-    <script src="{{ URL::asset('backend/js/typeahead.js') }}"></script>
-    <script src="{{ URL::asset('backend/js/select2.js') }}"></script>
     <script src="{{ URL::asset('backend/js/status.js') }}"></script>
     <script src="{{ URL::asset('backend/js/confirm-delete.js') }}"></script>
+    <script src="{{ URL::asset('backend/js/sidebar.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- End custom js for this page-->
 </body>
 

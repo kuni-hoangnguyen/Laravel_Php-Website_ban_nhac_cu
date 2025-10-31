@@ -1,10 +1,28 @@
-    function confirmDelete(event, link) {
-        // Prevent the default action (redirect)
-        event.preventDefault();
+function confirmDelete(event, link) {
+    event.preventDefault(); // Ngăn link hoạt động ngay
 
-        // Show confirmation prompt
-        if (confirm("Bạn có chắc là muốn xóa mục này không?")) {
-            // If user confirms, proceed with the deletion by redirecting to the link's href
-            window.location.href = link.href;
+    Swal.fire({
+        title: "Xác nhận xóa?",
+        text: "Bạn có chắc chắn muốn xóa mục này? Hành động này không thể hoàn tác!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#6c757d",
+        confirmButtonText: "Xóa",
+        cancelButtonText: "Hủy"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Đang xóa...",
+                icon: "info",
+                showConfirmButton: false,
+                timer: 800
+            });
+
+            // Chờ một chút để hiển thị animation rồi chuyển trang
+            setTimeout(() => {
+                window.location.href = link.href;
+            }, 800);
         }
-    }
+    });
+}
